@@ -2,7 +2,7 @@ import os
 import glob
 import markdown
 from flask import Flask, render_template, abort, Blueprint, send_from_directory, request, url_for
-from flask import Markup
+from markupsafe import Markup
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from urllib.parse import quote, unquote
@@ -16,6 +16,10 @@ CATEGORIES = [d for d in os.listdir(CONTENT_DIR) if os.path.isdir(os.path.join(C
 # Helper functions
 def get_categories():
     return [d for d in os.listdir(CONTENT_DIR) if os.path.isdir(os.path.join(CONTENT_DIR, d))]
+
+@app.context_processor
+def inject_globals():
+    return dict(categories=get_categories(), now=datetime.now())
 
 def get_stories(category):
     cat_path = os.path.join(CONTENT_DIR, category)
