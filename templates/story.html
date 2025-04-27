@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ story_name.replace('-', ' ').title() }} - Kids Stories{% endblock %}
+{% block og_title %}{{ story_name.replace('-', ' ').title() }}{% endblock %}
+{% block content %}
+<article>
+    <h2>{{ story_name.replace('-', ' ').title() }}</h2>
+    <div class="story-content">{{ html|safe }}</div>
+</article>
+<div class="ad-inline">Inline Ad Placeholder</div>
+<p><a href="{{ url_for('main.category_view', category=category) }}">&larr; Back to {{ category.replace('-', ' ').title() }}</a></p>
+{% endblock %}

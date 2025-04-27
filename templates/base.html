@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Kids Stories{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A collection of kids stories organized by category. Read fairy tales, animal stories, and more!">
+    <meta property="og:title" content="{% block og_title %}Kids Stories{% endblock %}">
+    <meta property="og:description" content="A collection of kids stories organized by category.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+    <!-- Google Analytics Placeholder -->
+    <!-- <script>/* Google Analytics code here */</script> -->
+    <!-- AdSense Placeholder -->
+    <!-- <script>/* AdSense code here */</script> -->
+</head>
+<body>
+    <header>
+        <h1><a href="/" style="color:inherit;text-decoration:none;">Kids Stories</a></h1>
+        <form action="/search" method="get" style="margin-top:1rem;">
+            <input id="search-input" name="q" type="search" placeholder="Search stories..." value="{{ request.args.get('q', '') }}" style="padding:0.5rem;width:70%;max-width:300px;">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    <nav>
+        {% for cat in get_categories() %}
+            <a href="{{ url_for('main.category_view', category=cat) }}">{{ cat.replace('-', ' ').title() }}</a>
+        {% endfor %}
+    </nav>
+    <div class="ad-banner">Ad Banner Placeholder</div>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <aside class="ad-sidebar">Ad Sidebar Placeholder</aside>
+    <footer>
+        <p>&copy; {{ now.year }} Kids Stories &middot; <a href="https://fairy-tales.rathnaschools.com" target="_blank">fairy-tales.rathnaschools.com</a></p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

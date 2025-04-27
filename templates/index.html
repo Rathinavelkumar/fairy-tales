@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Kids Stories - Home{% endblock %}
+{% block content %}
+<h2>Categories</h2>
+<ul>
+    {% for cat in categories %}
+    <li><a href="{{ url_for('main.category_view', category=cat) }}">{{ cat.replace('-', ' ').title() }}</a> ({{ stories_by_cat[cat]|length }} stories)</li>
+    {% endfor %}
+</ul>
+<hr>
+<h2>Latest Stories</h2>
+<div class="story-list">
+    {% for cat, stories in stories_by_cat.items() %}
+        {% for story in stories %}
+        <div class="story-item">
+            <h3><a href="{{ url_for('main.story_view', category=cat, story_name=story['filename']) }}">{{ story['title'] }}</a></h3>
+            <small>Category: <a href="{{ url_for('main.category_view', category=cat) }}">{{ cat.replace('-', ' ').title() }}</a></small>
+            <p>{{ story['excerpt']|truncate(120) }}</p>
+            <div class="ad-inline">Inline Ad Placeholder</div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

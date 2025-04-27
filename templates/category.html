@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ category.replace('-', ' ').title() }} - Kids Stories{% endblock %}
+{% block content %}
+<h2>{{ category.replace('-', ' ').title() }}</h2>
+<div class="story-list">
+    {% for story in stories %}
+    <div class="story-item">
+        <h3><a href="{{ url_for('main.story_view', category=category, story_name=story['filename']) }}">{{ story['title'] }}</a></h3>
+        <p>{{ story['excerpt']|truncate(120) }}</p>
+        <div class="ad-inline">Inline Ad Placeholder</div>
+    </div>
+    {% endfor %}
+</div>
+<div style="display:flex;justify-content:space-between;">
+    {% if prev_url %}<a id="prev-page" href="{{ prev_url }}">&laquo; Previous</a>{% endif %}
+    {% if next_url %}<a id="next-page" href="{{ next_url }}">Next &raquo;</a>{% endif %}
+</div>
+{% endblock %}

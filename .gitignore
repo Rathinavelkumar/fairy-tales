@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Content cache or temp
+*.swp
+
+# Admin script outputs
+admin/__pycache__/
+
+# Ignore local configs
+*.local
+
+# Ignore secrets (if any)
+secrets.*
